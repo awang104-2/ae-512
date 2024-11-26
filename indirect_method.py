@@ -36,17 +36,8 @@ import numpy as np
 from .nozzle_area import find_closest_index
 
 
-def process_nozzle_indirect_method(s0,
-                                   h0,
-                                   Area,
-                                   A_x,
-                                   A_star,
-                                   F_rho_a_star,
-                                   index_star,
-                                   rbf_interpolator_rho,
-                                   rbf_interpolator_speed,
-                                   rbf_interpolator_pressure,
-                                   rbf_interpolator_temperature):
+def process_nozzle_indirect_method(s0, h0, Area, A_x, A_star, F_rho_a_star, index_star, rbf_interpolator_rho,
+                                   rbf_interpolator_speed, rbf_interpolator_pressure, rbf_interpolator_temperature):
     """
     Routine to compute the inlet velocity using the bisection method,
     and calculate thermodynamic properties along the nozzle.
