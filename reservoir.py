@@ -32,12 +32,21 @@ import numpy as np
 from scipy.interpolate import LinearNDInterpolator
 
 
-def create_reservoir_interpolator(df):
+def create_reservoir_interpolator(df):  # Note: unsure if enthalpy and entropy are in molar form or massive form
+    temperature = df['T'].values  # Kelvins
+    pressure = df['p'].values  # Unsure what units the data is in
+    enthalpy = df['Enthalpy'].values  # Assume per unit mass
+    entropy = df['Entropy'].values  # Assume per unit mass
+
+    points = np.column_stack((temperature, pressure))  # Combines T and P into an array of 2D coordinates
+
+    enthalpy_interpolator = LinearNDInterpolator(points, enthalpy)  # Linear interpolation of enthalpy
+    entropy_interpolator = LinearNDInterpolator(points, entropy)  # Linear interpolation of entropy
 
     return enthalpy_interpolator, entropy_interpolator
 
-def get_reservoir_h_and_s(p, T, enthalpy_interpolator, entropy_interpolator):
-    h1 =
-    h, s = get_reservoir_h_and_s(p, T, enthalpy_interpolator, entropy_interpolator)
 
+def get_reservoir_h_and_s(p, T, enthalpy_interpolator, entropy_interpolator):
+    h = enthalpy_interpolator(T, p)
+    s = entropy_interpolator(T, p)
     return h, s
