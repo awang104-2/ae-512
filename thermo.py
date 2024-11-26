@@ -32,28 +32,25 @@ import pandas as pd
 import numpy as np
 from scipy.interpolate import RBFInterpolator
 
+
 def load_thermodynamic_data(filename):
     """
     Load thermodynamic data from the specified file.
     """
     # Load the data from the file
-    df = pd.read_csv(
-        filename,
-        sep=r'\s+',  
-        comment='#',  
-        header=None,  
-        names=['T', 'p', 'rho', 'MolarMass', 'Enthalpy', 'Entropy', 'SpeedOfSound']  # Column names
-    )
+    df = pd.read_csv(filename, sep=r'\s+', comment='#', header=None,
+                     names=['T', 'p', 'rho', 'MolarMass', 'Enthalpy', 'Entropy', 'SpeedOfSound'])  # Column names
     
     # Access variables from the dataset
-    Enthalpy       = df['Enthalpy'].values  
-    Entropy        = df['Entropy'].values  
-    rho            = df['rho'].values  
+    Enthalpy = df['Enthalpy'].values
+    Entropy = df['Entropy'].values
+    rho = df['rho'].values
     speed_of_sound = df['SpeedOfSound'].values  
-    Temperature    = df['T'].values  
-    Pressure       = df['p'].values  
+    Temperature = df['T'].values
+    Pressure = df['p'].values
     
     return df, Enthalpy, Entropy, rho, speed_of_sound, Pressure, Temperature
+
 
 def construct_rbf_interpolators(Enthalpy, Entropy, rho, speed_of_sound, Pressure, Temperature):
     """
@@ -76,7 +73,6 @@ def construct_rbf_interpolators(Enthalpy, Entropy, rho, speed_of_sound, Pressure
     # Prepare the data for RBF interpolation of pressure
     y_pressure = np.log(Pressure)
     rbf_interpolator_pressure = RBFInterpolator(x, y_pressure, kernel='quintic')
-
 
     return rbf_interpolator_rho, rbf_interpolator_speed, rbf_interpolator_pressure, rbf_interpolator_temperature
 

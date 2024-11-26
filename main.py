@@ -56,6 +56,7 @@ Area = load_area_data(file_path)
 # Create Radial Basis Function (RBF) interpolators for various thermodynamic properties
 # These interpolators are used to estimate values like density and speed of sound at different states
 rbf_interpolator_rho, rbf_interpolator_speed, rbf_interpolator_pressure, rbf_interpolator_temperature = construct_rbf_interpolators(Enthalpy, Entropy, rho, speed_of_sound, Pressure, Temperature)
+
 # Compute reservoir conditions based on the provided pressure and temperature
 # These conditions define the thermodynamic state at the reservoir (upstream of the nozzle)
 enthalpy_interpolator, entropy_interpolator = create_reservoir_interpolator(df)
@@ -100,7 +101,7 @@ print("Temperature (K):", temperature_values)
 print("Mach number values:", mach_values)
 print("x positions (m):", x_positions)
 
-R     = 8.3144598 / 0.2672963120279829E-01
+R = 8.3144598 / 0.2672963120279829E-01
 gamma = 0.1242430995249157E+01
 result = process_nozzle_perfect_gas(gamma, R, p0, T0, Area, A_x, A_star, index_star)
 enthalpy_values_fr, velocity_values_fr, density_values_fr, pressure_values_fr, temperature_values_fr, mach_values_fr, x_positions_fr = result
