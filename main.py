@@ -32,6 +32,7 @@ density, pressure, etc.) based on area distribution and reservoir conditions.
 """
 
 import numpy as np
+import os
 
 # GIVEN
 from nozzle_area import load_area_data, find_closest_index, find_astar
@@ -44,12 +45,15 @@ from indirect_method import process_nozzle_indirect_method
 from frozen import process_nozzle_perfect_gas
 
 # Load thermodynamic data from a file (contains enthalpy, entropy, density, etc.)
-filename = '../../Downloads/code/code/data/output.dat'
-df, Enthalpy, Entropy, rho, speed_of_sound, Pressure, Temperature = load_thermodynamic_data(filename)
-
+print('Loading thermodynamic data...')
+output_data = 'data/output.dat'
+file_path = os.path.abspath(output_data)
+df, Enthalpy, Entropy, rho, speed_of_sound, Pressure, Temperature = load_thermodynamic_data(file_path)
 
 # Load the area variation data: File containing the x and A(x) data
-file_path = '../../Downloads/code/code/data/area.dat'
+print('Loading area variation data...')
+area_data = 'data/area.dat'
+file_path = os.path.abspath(output_data)
 Area = load_area_data(file_path)
 
 
@@ -65,7 +69,6 @@ enthalpy_interpolator, entropy_interpolator = create_reservoir_interpolator(df)
 p0 = 5000000
 T0 = 4500
 h0, s0 = get_reservoir_h_and_s(p0, T0, enthalpy_interpolator, entropy_interpolator)
-
 
 # Find the nozzle throat location (x*) and the corresponding minimum area (A*)
 x_star, A_star = find_astar(Area)

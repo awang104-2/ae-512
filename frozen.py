@@ -1,6 +1,8 @@
 import numpy as np
 
+
 def process_nozzle_perfect_gas(gamma, R, p0, T0, Area, A_x, A_star, index_star):
+
     """
     Routine to compute flow properties in a nozzle for a perfect gas using the area-Mach number relation.
 
