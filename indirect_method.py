@@ -32,7 +32,7 @@ density, pressure, etc.) based on area distribution and reservoir conditions.
 """
 
 import numpy as np
-from .nozzle_area import find_closest_index
+from nozzle_area import find_closest_index
 
 
 def process_nozzle_indirect_method(s0, h0, Area, A_x, A_star, F_rho_a_star, index_star, rbf_interpolator_rho,
