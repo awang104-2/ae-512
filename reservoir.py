@@ -37,5 +37,7 @@ def create_reservoir_interpolator(df):
     return enthalpy_interpolator, entropy_interpolator
 
 def get_reservoir_h_and_s(p, T, enthalpy_interpolator, entropy_interpolator):
-    
+    h1 =
+    h, s = get_reservoir_h_and_s(p, T, enthalpy_interpolator, entropy_interpolator)
+
     return h, s

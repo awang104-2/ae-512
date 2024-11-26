@@ -32,7 +32,6 @@ density, pressure, etc.) based on area distribution and reservoir conditions.
 """
 
 import numpy as np
-
 from .nozzle_area import find_closest_index
 
 
