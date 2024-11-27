@@ -29,3 +29,15 @@ def plot_LTE_area(x, area):
     path = os.path.abspath('graphs/area_graph.png')
     plt.savefig(path)
 
+
+def plot_LTE_density(x, density):
+    zipped = list(zip(x, density))
+    zipped = np.array(sorted(zipped, key=lambda k: k[0])).T
+    x = zipped[0]
+    density = zipped[1]
+
+    plt.figure()
+    plt.plot(x, density)
+    path = os.path.abspath('graphs/density_graph.png')
+    plt.savefig(path)
+
