@@ -33,6 +33,8 @@ density, pressure, etc.) based on area distribution and reservoir conditions.
 
 import numpy as np
 import os
+
+import plots
 import write_to_csv
 
 # GIVEN
@@ -44,6 +46,7 @@ from reservoir import get_reservoir_h_and_s, create_reservoir_interpolator
 from sonic import compute_hstar_sstar, compute_rho_star_astar_Fstar
 from indirect_method import process_nozzle_indirect_method
 from frozen import process_nozzle_perfect_gas
+from plots import *
 
 # Load thermodynamic data from a file (contains enthalpy, entropy, density, etc.)
 output_data = 'data/output.dat'
@@ -95,6 +98,7 @@ mach_values = np.array(mach_values)
 x_positions = np.array(x_positions)
 
 # Output the results for verification
+'''
 print("Enthalpy values (J/kg):", enthalpy_values)
 print("Velocity values (m/s):", velocity_values)
 print("Density values (kg/m^3):", density_values)
@@ -102,12 +106,19 @@ print("Pressure (Pa):", pressure_values)
 print("Temperature (K):", temperature_values)
 print("Mach number values:", mach_values)
 print("x positions (m):", x_positions)
+'''
 
-data = list(zip(enthalpy_values, velocity_values, density_values, pressure_values, temperature_values, mach_values, x_positions))
-headers = ["Enthalpy values (J/kg)", "Velocity values (m/s)", "Density values (kg/m^3)", "Pressure (Pa)", "Temperature (K)", "Mach number values", "x positions (m)"]
+data = list(zip(x_positions, enthalpy_values, velocity_values, density_values, pressure_values, temperature_values, mach_values))
+headers = ["x positions (m)", "Enthalpy values (J/kg)", "Velocity values (m/s)", "Density values (kg/m^3)", "Pressure (Pa)", "Temperature (K)", "Mach number values"]
 filename = 'data/nozzle_thermo_properties.dat'
 
 write_to_csv.write_to_csv(filename, data, headers)
+write_to_csv.sort(filename, headers[0])
+
+plots.plot_LTE_enthalpy(x_positions, enthalpy_values)
+plots.plot_LTE_area(Area['x'].values, A_x)
+
+exit(1)
 
 R = 8.3144598 / 0.2672963120279829E-01
 gamma = 0.1242430995249157E+01
