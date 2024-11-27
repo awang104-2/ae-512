@@ -117,6 +117,7 @@ write_to_csv.sort(filename, headers[0])
 
 plots.plot_LTE_enthalpy(x_positions, enthalpy_values)
 plots.plot_LTE_area(Area['x'].values, A_x)
+plots.plot_LTE_density(x_positions, density_values)
 
 exit(1)
 
