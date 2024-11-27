@@ -54,4 +54,5 @@ def process_nozzle_indirect_method(s0, h0, Area, A_x, A_star, F_rho_a_star, inde
     Returns:
     - Lists of enthalpy, velocity, density, pressure, temperature, Mach number, and x positions.
     """
+
     return enthalpy_values, velocity_values, density_values, pressure_values, temperature_values, mach_values, x_positions
