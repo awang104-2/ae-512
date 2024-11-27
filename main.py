@@ -33,6 +33,7 @@ density, pressure, etc.) based on area distribution and reservoir conditions.
 
 import numpy as np
 import os
+import write_to_csv
 
 # GIVEN
 from nozzle_area import load_area_data, find_closest_index, find_astar
@@ -101,6 +102,12 @@ print("Pressure (Pa):", pressure_values)
 print("Temperature (K):", temperature_values)
 print("Mach number values:", mach_values)
 print("x positions (m):", x_positions)
+
+data = list(zip(enthalpy_values, velocity_values, density_values, pressure_values, temperature_values, mach_values, x_positions))
+headers = ["Enthalpy values (J/kg)", "Velocity values (m/s)", "Density values (kg/m^3)", "Pressure (Pa)", "Temperature (K)", "Mach number values", "x positions (m)"]
+filename = 'data/nozzle_thermo_properties.dat'
+
+write_to_csv.write_to_csv(filename, data, headers)
 
 R = 8.3144598 / 0.2672963120279829E-01
 gamma = 0.1242430995249157E+01

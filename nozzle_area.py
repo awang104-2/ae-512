@@ -28,7 +28,6 @@ SOFTWARE.
 """
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def load_area_data(file_path):

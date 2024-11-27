@@ -70,4 +70,7 @@ def sonic_tester():
 
 
 if __name__ == '__main__':
-    sonic_tester()
+    a = [1, 2, 3, 4, 5]
+    b = [21, 22, 23, 24, 25]
+    c = zip(a, b)
+    print(list(c))
