@@ -45,13 +45,11 @@ from indirect_method import process_nozzle_indirect_method
 from frozen import process_nozzle_perfect_gas
 
 # Load thermodynamic data from a file (contains enthalpy, entropy, density, etc.)
-print('Loading thermodynamic data...')
 output_data = 'data/output.dat'
 file_path = os.path.abspath(output_data)
 df, Enthalpy, Entropy, rho, speed_of_sound, Pressure, Temperature = load_thermodynamic_data(file_path)
 
 # Load the area variation data: File containing the x and A(x) data
-print('Loading area variation data...')
 area_data = 'data/area.dat'
 file_path = os.path.abspath(area_data)
 Area = load_area_data(file_path)
