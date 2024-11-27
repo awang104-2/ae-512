@@ -4,11 +4,6 @@ import os
 
 
 def plot_LTE_enthalpy(x, enthalpy):
-    zipped = list(zip(x, enthalpy))
-    zipped = np.array(sorted(zipped, key=lambda k: k[0])).T
-    x = zipped[0]
-    enthalpy = zipped[1]
-
     plt.figure()
     plt.plot(x, enthalpy)
     plt.title('Position (m) vs. Enthalpy (J/kg)')
@@ -40,4 +35,17 @@ def plot_LTE_density(x, density):
     plt.plot(x, density)
     path = os.path.abspath('graphs/density_graph.png')
     plt.savefig(path)
+
+
+def plot_LTE_velocity(x, velocity):
+    zipped = list(zip(x, velocity))
+    zipped = np.array(sorted(zipped, key=lambda k: k[0])).T
+    x = zipped[0]
+    velocity = zipped[1]
+
+    plt.figure()
+    plt.plot(x, velocity)
+    path = os.path.abspath('graphs/velocity_graph.png')
+    plt.savefig(path)
+
 
