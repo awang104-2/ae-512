@@ -32,9 +32,10 @@ import numpy as np
 from scipy.interpolate import LinearNDInterpolator
 
 
-def create_reservoir_interpolator(df):  # Note: unsure if enthalpy and entropy are in molar form or massive form
-    temperature = df['T'].values  # Kelvins
-    pressure = df['p'].values  # Unsure what units the data is in
+# Creates interpolators for thermodynamic properties for the reservoir
+def create_reservoir_interpolator(df):
+    temperature = df['T'].values
+    pressure = df['p'].values
     enthalpy = df['Enthalpy'].values  # per unit mass
     entropy = df['Entropy'].values  # per unit mass
 
@@ -46,7 +47,10 @@ def create_reservoir_interpolator(df):  # Note: unsure if enthalpy and entropy a
     return enthalpy_interpolator, entropy_interpolator
 
 
+# Computes enthalpy and entropy from pressure and temperature
 def get_reservoir_h_and_s(p, T, enthalpy_interpolator, entropy_interpolator):
+    # Finding enthalpy and entropy using linear interpolation based on the thermodynamic state specified by p and T
     h = enthalpy_interpolator(T, p)
     s = entropy_interpolator(T, p)
-    return h, s
+
+    return h, s  # Returns enthalpy and entropy, per unit mass
