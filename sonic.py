@@ -28,7 +28,7 @@ def compute_hstar_sstar(s0, h0, rbf_interpolator_speed):
 
 def compute_rho_star_astar_Fstar(s0, h_star, rbf_interpolator_rho, rbf_interpolator_speed):
     # Prepare log-transformed inputs
-    log_inputs = np.log([s0, h_star])  # s0 and h_star are inputs
+    log_inputs = np.log([s0, h_star]).reshape(1, -1)  # s0 and h_star are inputs
 
     # Interpolate in log space
     log_rho_star = rbf_interpolator_rho(log_inputs)  # Log of density
