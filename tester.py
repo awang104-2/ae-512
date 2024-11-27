@@ -2,6 +2,7 @@ import numpy as np
 from scipy.interpolate import LinearNDInterpolator
 import matplotlib.pyplot as plt
 import os
+import thermo, sonic, reservoir
 
 
 def path_tester():
@@ -14,6 +15,8 @@ def path_tester():
     # Get the directory containing the file
     directory = os.path.dirname(file_path)
     print("Directory:", directory)
+
+    return absolute_path
 
 
 def interpolator_tester():
@@ -43,5 +46,28 @@ def interpolator_tester():
     plt.show()
 
 
+def thermo_tester():
+    file_path = path_tester()
+    df, Enthalpy, Entropy, rho, speed_of_sound, Pressure, Temperature = thermo.load_thermodynamic_data(file_path)
+    rbf_interpolator_rho, rbf_interpolator_speed, rbf_interpolator_pressure, rbf_interpolator_temperature = thermo.construct_rbf_interpolators(Enthalpy, Entropy, rho, speed_of_sound, Pressure, Temperature)
+    h = np.log(0.3019409035292074e7)
+    s = np.log(0.9337903799336349e4)
+    rho = np.exp(rbf_interpolator_rho([[s, h]])[0])
+    print('Density', rho)
+    print('Expected Density', 0.1383229745292957)
+    print('Fractional Error', np.abs(rho - 0.1383229745292957) / 0.1383229745292957)
+    return df, rbf_interpolator_rho, rbf_interpolator_speed, rbf_interpolator_pressure, rbf_interpolator_temperature
+
+
+def sonic_tester():
+    p0 = 5000000
+    T0 = 4500
+    df, rbf_interpolator_rho, rbf_interpolator_speed, rbf_interpolator_pressure, rbf_interpolator_temperature = thermo_tester()
+    enthalpy_interpolator, entropy_interpolator = reservoir.create_reservoir_interpolator(df)
+    h0, s0 = reservoir.get_reservoir_h_and_s(p0, T0, enthalpy_interpolator, entropy_interpolator)
+    rho_ratio = sonic.__iterate_rho(h0, s0, rbf_interpolator_rho, rbf_interpolator_speed)
+    print('Final Result', rho_ratio)
+
+
 if __name__ == '__main__':
-    path_tester()
+    sonic_tester()
