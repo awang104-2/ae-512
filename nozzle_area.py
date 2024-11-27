@@ -30,10 +30,12 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def load_area_data(file_path):
     # Load the area variation data from file
-    area = pd.read_csv(file_path, sep='\s+', header=None, names=['x', 'A'])
+    area = pd.read_csv(file_path, sep='\\s+', header=None, names=['x', 'A'])
     return area
+
 
 def find_astar(df):
     # Find the location and value of A*
@@ -41,6 +43,7 @@ def find_astar(df):
     x_star = df['x'].iloc[idx_min]
     A_star = df['A'].iloc[idx_min]
     return x_star, A_star
+
 
 def find_closest_index(array, value):
     """

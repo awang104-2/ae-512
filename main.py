@@ -53,7 +53,7 @@ df, Enthalpy, Entropy, rho, speed_of_sound, Pressure, Temperature = load_thermod
 # Load the area variation data: File containing the x and A(x) data
 print('Loading area variation data...')
 area_data = 'data/area.dat'
-file_path = os.path.abspath(output_data)
+file_path = os.path.abspath(area_data)
 Area = load_area_data(file_path)
 
 
