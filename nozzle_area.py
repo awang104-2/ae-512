@@ -44,7 +44,7 @@ def find_astar(df):
     return x_star, A_star
 
 
-def find_closest_index(array, value, diff_limit=None):
+def find_closest_index(array, value):
     """
     Find the index of the entry in 'array' that is closest to the 'value'.
     
@@ -57,7 +57,4 @@ def find_closest_index(array, value, diff_limit=None):
     """
     array = np.asarray(array)  # Ensure input is converted to a numpy array
     index = np.argmin(np.abs(array - value))  # Find the index of the smallest difference
-    if diff_limit:
-        if np.min(np.abs(array - value)) >= diff_limit:
-            return -1
     return index

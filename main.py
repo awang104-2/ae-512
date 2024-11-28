@@ -113,12 +113,17 @@ headers = ["x positions (m)", "Enthalpy values (J/kg)", "Velocity values (m/s)",
 filename = 'data/nozzle_thermo_properties.dat'
 
 write_to_csv.write_to_csv(filename, data, headers)
-write_to_csv.sort(filename, headers[0])
 
-plots.plot_LTE_enthalpy(x_positions, enthalpy_values)
-plots.plot_LTE_area(Area['x'].values, A_x)
-plots.plot_LTE_density(x_positions, density_values)
-plots.plot_LTE_velocity(x_positions, velocity_values)
+# Plotting position vs. enthalpy and area
+plots.plot_enthalpy(x_positions, enthalpy_values)
+plots.plot_area(Area['x'].values, A_x)
+
+# Plotting u(x), p(x), T(x), rho(x), and M(x)
+plots.plot_velocity(x_positions, velocity_values)
+plots.plot_pressure(x_positions, pressure_values)
+plots.plot_temperature(x_positions, temperature_values)
+plots.plot_density(x_positions, density_values)
+plots.plot_mach_number(x_positions, mach_values)
 
 exit(1)
 
