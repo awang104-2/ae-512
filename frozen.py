@@ -30,18 +30,20 @@ def process_nozzle_perfect_gas(gamma, R, p0, T0, Area, A_x, A_star, index_star):
     x_positions = []
 
     for i, A_i in enumerate(A_x):
-        # Finds the corresponding Mach number using Newton's Method
-        iterations = 50
+        # Finds the corresponding Mach number using Newton's method
+        iterations = 50  # Number of Newton's method iterations
+        M = 0  # Test Mach number
         if i < index_star:  # subsonic regime
-            M = 0.5
+            M = 0.5  # Initial guess
         else:
-            M = 2
+            M = 2  # Initial guess
         for k in range(iterations):
             exponent = ((gamma + 1) / (2 * (gamma - 1)))
             f = (1 / M) * (2 / (gamma + 1))**exponent * (1 + (gamma - 1) / 2 * M**2)**exponent - (A_i / A_star)
             Df = (2 * M**2 - 2) * (((gamma - 1) * M**2 + 2) / (gamma + 1))**exponent / ((gamma - 1) * M**4 + 2 * M**2)
             M = M - f / Df
 
+        # Finding thermodynamic properties
         T = T0 * 1 / (1 + (gamma - 1) / 2 * M**2)
         p = p0 * (T / T0)**(gamma / (gamma - 1))
         rho = p / (R * T)
@@ -50,6 +52,7 @@ def process_nozzle_perfect_gas(gamma, R, p0, T0, Area, A_x, A_star, index_star):
         h = gamma * R / (gamma - 1) * T
         x = Area['x'][i]
 
+        # Adding thermodynamic properties to lists
         enthalpy_values.append(h)
         velocity_values.append(u)
         density_values.append(rho)

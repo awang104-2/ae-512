@@ -54,6 +54,7 @@ def process_nozzle_indirect_method(s0, h0, Area, A_x, A_star, F_rho_a_star, inde
     Returns:
     - Lists of enthalpy, velocity, density, pressure, temperature, Mach number, and x positions.
     """
+    # Initialize lists
     enthalpy_values = []
     velocity_values = []
     density_values = []
@@ -62,12 +63,16 @@ def process_nozzle_indirect_method(s0, h0, Area, A_x, A_star, F_rho_a_star, inde
     mach_values = []
     x_positions = []
 
-    h_inlet = h0 * 0.99
-    h_values = np.linspace(h_inlet, 0.5 * h0, 500)
+    h_inlet = h0 * 0.99  # "Inlet enthalpy" for graphical reasons
+    h_values = np.linspace(h_inlet, 0.5 * h0, 500)  # Test enthalpy values
 
+    # For each enthalpy value, finds the closest x value using the indirect LTE approach
     for h in h_values:
-        if h <= h_inlet:
+        if h <= h_inlet:  # Ignore enthalpies greater than inlet
+            # Converted to log input for interpolator
             log_input = np.log([s0, h]).reshape(1, -1)
+
+            # Finding thermodynamic properties
             rho = np.exp(rbf_interpolator_rho(log_input))[0]
             speed_of_sound = np.exp(rbf_interpolator_speed(log_input))[0]
             pressure = np.exp(rbf_interpolator_pressure(log_input))[0]
@@ -75,6 +80,8 @@ def process_nozzle_indirect_method(s0, h0, Area, A_x, A_star, F_rho_a_star, inde
             velocity = np.sqrt(2 * (h0 - h))
             mach = velocity / speed_of_sound
             area = (F_rho_a_star / (rho * velocity) * A_star)[0]
+
+            # Checks regime
             if mach < 1:
                 index = find_closest_index(A_x[:index_star], area)
             else:
