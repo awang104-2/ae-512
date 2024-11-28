@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import os
 
 
-def plot_enthalpy(x, enthalpy):
-    x, enthalpy = sort_list(x, enthalpy)
+def plot_enthalpy(LTE, frozen):
+    x_lte, enthalpy_lte = LTE
+    x_fr, enthalpy_fr = frozen
     plt.figure()
-    plt.plot(x, enthalpy)
+    plt.plot(x_lte, enthalpy_lte)
+    plt.plot(x_fr, enthalpy_fr, linestyle='--', linewidth=2)
     plt.title('Position (m) vs. Enthalpy (J/kg)')
     plt.xlabel(r'Position $x$ along the nozzle (m)')
     plt.ylabel(r'Enthalpy $h$ (J/kg)')
@@ -16,7 +17,6 @@ def plot_enthalpy(x, enthalpy):
 
 
 def plot_area(x, area):
-    x, area = sort_list(x, area)
     plt.figure()
     plt.plot(x, area)
     plt.title(r'Position (m) vs. Area ($m^2$)')
@@ -26,10 +26,12 @@ def plot_area(x, area):
     plt.savefig(path)
 
 
-def plot_velocity(x, velocity):
-    x, velocity = sort_list(x, velocity)
+def plot_velocity(LTE, frozen):
+    x_lte, velocity_lte = LTE
+    x_fr, velocity_fr = frozen
     plt.figure()
-    plt.plot(x, velocity)
+    plt.plot(x_lte, velocity_lte)
+    plt.plot(x_fr, velocity_fr, linestyle='--', linewidth=2)
     plt.title('Position (m) vs. Velocity (m/s)')
     plt.xlabel(r'Position $x$ along the nozzle (m)')
     plt.ylabel(r'Fluid Velocity $u$ (m/s)')
@@ -38,10 +40,12 @@ def plot_velocity(x, velocity):
     plt.savefig(path)
 
 
-def plot_pressure(x, pressure):
-    x, pressure = sort_list(x, pressure)
+def plot_pressure(LTE, frozen):
+    x_lte, pressure_lte = LTE
+    x_fr, pressure_fr = frozen
     plt.figure()
-    plt.plot(x, pressure)
+    plt.plot(x_lte, pressure_lte)
+    plt.plot(x_fr, pressure_fr, linestyle='--', linewidth=2)
     plt.title('Position (m) vs. Pressure (Pa)')
     plt.xlabel(r'Position $x$ along the nozzle (m)')
     plt.ylabel('Fluid Pressure $p$ (Pa)')
@@ -50,10 +54,12 @@ def plot_pressure(x, pressure):
     plt.savefig(path)
 
 
-def plot_temperature(x, temperature):
-    x, pressure = sort_list(x, temperature)
+def plot_temperature(LTE, frozen):
+    x_lte, temperature_lte = LTE
+    x_fr, temperature_fr = frozen
     plt.figure()
-    plt.plot(x, pressure)
+    plt.plot(x_lte, temperature_lte)
+    plt.plot(x_fr, temperature_fr, linestyle='--', linewidth=2)
     plt.title('Position (m) vs. Temperature (K)')
     plt.xlabel(r'Position $x$ along the nozzle (m)')
     plt.ylabel('Temperature $T$ (K)')
@@ -62,10 +68,12 @@ def plot_temperature(x, temperature):
     plt.savefig(path)
 
 
-def plot_density(x, density):
-    x, density = sort_list(x, density)
+def plot_density(LTE, frozen):
+    x_lte, density_lte = LTE
+    x_fr, density_fr = frozen
     plt.figure()
-    plt.plot(x, density)
+    plt.plot(x_lte, density_lte)
+    plt.plot(x_fr, density_fr, linestyle='--', linewidth=2)
     plt.title(r'Position (m) vs. Pressure (kg/$m^3$)')
     plt.xlabel(r'Position $x$ along the nozzle (m)')
     plt.ylabel(r'Density $rho$ (kg/$m^3$)')
@@ -74,22 +82,18 @@ def plot_density(x, density):
     plt.savefig(path)
 
 
-def plot_mach_number(x, mach_number):
-    x, mach_number = sort_list(x, mach_number)
+def plot_mach_number(LTE, frozen):
+    x_lte, mach_lte = LTE
+    x_fr, mach_fr = frozen
     plt.figure()
-    plt.plot(x, mach_number)
+    plt.plot(x_lte, mach_lte)
+    plt.plot(x_fr, mach_fr, linestyle='--', linewidth=2)
     plt.title(r'Position (m) vs. Mach Number')
     plt.xlabel(r'Position $x$ along the nozzle (m)')
     plt.ylabel(r'Mach Number $M$')
     plt.legend(['LTE Indirect Method', 'Frozen Flow'])
     path = os.path.abspath('graphs/mach_graph.png')
     plt.savefig(path)
-
-
-def sort_list(l1, l2, column=0):
-    zipped = list(zip(l1, l2))
-    zipped = np.array(sorted(zipped, key=lambda k: k[column])).T
-    return zipped
 
 
 

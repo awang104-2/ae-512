@@ -19,5 +19,43 @@ def process_nozzle_perfect_gas(gamma, R, p0, T0, Area, A_x, A_star, index_star):
     Returns:
     - Lists of enthalpy, velocity, density, pressure, temperature, Mach number, and x positions.
     """
-    
+
+    # Initialize empty lists of the function's returns
+    enthalpy_values = []
+    velocity_values = []
+    density_values = []
+    pressure_values = []
+    temperature_values = []
+    mach_values = []
+    x_positions = []
+
+    for i, A_i in enumerate(A_x):
+        # Finds the corresponding Mach number using Newton's Method
+        iterations = 50
+        if i < index_star:  # subsonic regime
+            M = 0.5
+        else:
+            M = 2
+        for k in range(iterations):
+            exponent = ((gamma + 1) / (2 * (gamma - 1)))
+            f = (1 / M) * (2 / (gamma + 1))**exponent * (1 + (gamma - 1) / 2 * M**2)**exponent - (A_i / A_star)
+            Df = (2 * M**2 - 2) * (((gamma - 1) * M**2 + 2) / (gamma + 1))**exponent / ((gamma - 1) * M**4 + 2 * M**2)
+            M = M - f / Df
+
+        T = T0 * 1 / (1 + (gamma - 1) / 2 * M**2)
+        p = p0 * (T / T0)**(gamma / (gamma - 1))
+        rho = p / (R * T)
+        a = np.sqrt(gamma * R * T)
+        u = M * a
+        h = gamma * R / (gamma - 1) * T
+        x = Area['x'][i]
+
+        enthalpy_values.append(h)
+        velocity_values.append(u)
+        density_values.append(rho)
+        pressure_values.append(p)
+        temperature_values.append(T)
+        mach_values.append(M)
+        x_positions.append(x)
+
     return enthalpy_values, velocity_values, density_values, pressure_values, temperature_values, mach_values, x_positions

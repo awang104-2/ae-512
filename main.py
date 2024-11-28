@@ -114,20 +114,21 @@ filename = 'data/nozzle_thermo_properties.dat'
 
 write_to_csv.write_to_csv(filename, data, headers)
 
-# Plotting position vs. enthalpy and area
-plots.plot_enthalpy(x_positions, enthalpy_values)
-plots.plot_area(Area['x'].values, A_x)
-
-# Plotting u(x), p(x), T(x), rho(x), and M(x)
-plots.plot_velocity(x_positions, velocity_values)
-plots.plot_pressure(x_positions, pressure_values)
-plots.plot_temperature(x_positions, temperature_values)
-plots.plot_density(x_positions, density_values)
-plots.plot_mach_number(x_positions, mach_values)
-
-exit(1)
-
 R = 8.3144598 / 0.2672963120279829E-01
 gamma = 0.1242430995249157E+01
 result = process_nozzle_perfect_gas(gamma, R, p0, T0, Area, A_x, A_star, index_star)
 enthalpy_values_fr, velocity_values_fr, density_values_fr, pressure_values_fr, temperature_values_fr, mach_values_fr, x_positions_fr = result
+
+
+# Plotting position vs. enthalpy and area
+plots.plot_enthalpy((x_positions, enthalpy_values), (x_positions_fr, enthalpy_values_fr))
+plots.plot_area(Area['x'].values, A_x)
+
+# Plotting u(x), p(x), T(x), rho(x), and M(x)
+plots.plot_velocity((x_positions, velocity_values), (x_positions_fr, velocity_values_fr))
+plots.plot_pressure((x_positions, pressure_values), (x_positions_fr, pressure_values_fr))
+plots.plot_temperature((x_positions, temperature_values), (x_positions_fr, temperature_values_fr))
+plots.plot_density((x_positions, density_values), (x_positions_fr, density_values_fr))
+plots.plot_mach_number((x_positions, mach_values), (x_positions_fr, mach_values_fr))
+
+print('Completed.')
