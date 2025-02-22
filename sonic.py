@@ -1,3 +1,13 @@
+"""
+This file is licensed under the MIT License.
+Copyright (c) 2024 Marco Panesi, Center for Hypersonics and Entry Systems Studies (CHESS), University of Illinois.
+
+The original project provided a framework with blank functions.
+This file has been significantly modified and fully implemented by awang104-2 since 11-20-2024.
+
+The full license text is available in the LICENSE file in the project root.
+"""
+
 import numpy as np
 
 from scipy.optimize import fsolve
