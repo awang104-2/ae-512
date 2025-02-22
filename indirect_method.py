@@ -1,10 +1,10 @@
 """
 MIT License
 
-Copyright (c) 2024 Marco Panesi, 
-Center for Hypersonics and Entry Systems Studies (CHESS), 
-University of Illinois.
-Copyright (c) 2024 awang104-2
+Copyright (c) 2024 Marco Panesi, Center for Hypersonics and Entry Systems Studies (CHESS), University of Illinois.
+
+The function process_nozzle_indirect_method was originally provided as a blank template.
+Implementation of this function by awang104-2 since 11-20-2024.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
