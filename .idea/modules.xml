@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ae_512.iml" filepath="$PROJECT_DIR$/.idea/ae_512.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../ae_512_test/.idea/ae_512_test.iml" filepath="$PROJECT_DIR$/../ae_512_test/.idea/ae_512_test.iml" />
-    </modules>
-  </component>
-</project>
