@@ -2,9 +2,6 @@ MIT License
 
 Copyright (c) 2024 Marco Panesi, Center for Hypersonics and Entry Systems Studies (CHESS), University of Illinois.
 
-Source code was originally provided as a series of blank functions to provide a general guiding structure for the project.
-Implementation of the blank functions were made by awang104-2 since 11-20-2024.
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -22,3 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+**Modifications:**
+Source code was originally provided as a series of blank functions to provide a general guiding structure for the project.
+Implementation of the blank functions were made by awang104-2 since 11-20-2024.
