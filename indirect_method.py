@@ -1,11 +1,10 @@
 """
 MIT License
 
-Copyright (c) 2024 
-
-Marco Panesi, 
+Copyright (c) 2024 Marco Panesi, 
 Center for Hypersonics and Entry Systems Studies (CHESS), 
 University of Illinois.
+Copyright (c) 2024 awang104-2
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
